@@ -45,12 +45,6 @@ PeakIndex=getPeaks(cropImage);
 PeakIndex1=PeakFilter(PeakIndex, cropMask);
 % remove some peaks that are detrived from noisy data.
 Myofibrils=getMyofibrils(PeakIndex1,cropMask);
-% connect peaks to get myofibrils
-[Myofibrils_A, Myofibrils_L, Myofibrils_I, Myofibrils_D]=MyofibrilAssess(Myofibrils,PeakIndex1);
-% calculate properties of the myofibrils
-AcceptedMyofibril=MyofibrilFilter(Myofibrils,Myofibrils_A, Myofibrils_L, Myofibrils_I, Myofibrils_D);
-% filter the myofibrils
-
 
 % produce the jpg image
 f=figure(1);
@@ -89,30 +83,18 @@ figure(f);
 subplot(3,2,4)
 % cropped image with myofibrils overlay
 imshow(cropImage.*cropMask,[])
-hold on
-for i=1:length(AcceptedMyofibril)
-    tempM=Myofibrils{AcceptedMyofibril(i)};
-    plot(tempM(:,2),tempM(:,1))
+
+hold on;
+for i = 1:length(sMyofilaments.myofilamentsMerged) 
+    x = sMyofilaments.myofilamentsMerged{i}.xPath;
+    y = sMyofilaments.myofilamentsMerged{i}.yPath;
+    plot(x, y);
 end
 
 subplot(3,2,5)
 % cropped image with myofibril overlay
 imshow(A);
 [a,b]=size(cropImage);
-% imshow(cropImage,[])
-% hold on
-% for i=1:length(AcceptedMyofibril)
-%     tempM=Myofibrils{AcceptedMyofibril(i)};
-%     y=tempM(:,2)';
-%     x1=tempM(:,1)'+3;
-%     x2=tempM(:,1)'-3;
-%     plot(y, x1, 'y','LineWidth', 2);
-%     plot(y, x1, 'y','LineWidth', 2);
-%     y2 = [y,fliplr(y)];
-%     inBetween = [x1, fliplr(x2)];
-%     fill(y2, inBetween, 'y');
-% end
-
 
 subplot(3,2,6)
 % several parameters to check the analysis process
@@ -126,8 +108,28 @@ ta=[2:-4/a:0,0:4/a:2];
 ta(find(ta==0))=[];
 tb=[2:-4/b:0,0:4/b:2];
 tb(find(tb==0))=[];
-Alignment=sum(abs(Myofibrils_D(AcceptedMyofibril)-Direction).*...%weighted by length
-    Myofibrils_L(AcceptedMyofibril))/sum(Myofibrils_L(AcceptedMyofibril));
+
+Len = length(sMyofilaments.myofilamentsMerged);
+Myofibrils_L=zeros(1,Len);
+Myofibrils_D=zeros(1,Len);
+
+for i=1:Len
+    tempM=sMyofilaments.myofilamentsMerged{i};
+    [Mlen,~]=size(tempM.xPath);
+    % linear regression
+    X=[ones(Mlen,1),tempM.xPath];
+    y=tempM.yPath;
+    tempb=X\y;
+    tempD=tempb(2);
+    tempD=atan(tempD);%radians direction
+    Myofibrils_D(i)=-tempD/pi;% angle direction
+    % because coordinates are counted from the top-left corner,
+    % the direction needed to be reversed
+    Myofibrils_L(i)=Mlen;
+end
+
+Alignment=sum(abs(Myofibrils_D-Direction).*...%weighted by length
+Myofibrils_L/sum(Myofibrils_L));
 
 
 Str={['Cell length:     ',num2str(CellLength)],...
