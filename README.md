@@ -15,7 +15,7 @@ Tsan, Yao-Chang, et al. "Physiologic Biomechanics Enhance Reproducible Contracti
 5.	Wait for a File Explorer window to pop up and select a single TIF file for analysis.
 6.	The analysis will run and values for specific images will appear in a folder titled MFAnalysis in the folder containing the images. An Excel workbook with values will be populated in a file titled MyofiberQuantResults.xls in the MFAnalysis folder.
 
-#Notes
+# Notes
 - MyofiberQuant assumes that myofibrils will be generally organized through micropatterning and that myofibrils will be generally oriented along the horizontal axis of the image. The algorithm will not be accurate for disorganized myofibrils that occur in absence of micropatterning since signal peaks are expected to occur along the horizontal axis - disorganized myofibrils will cause signal intensity drop-out and over-estimates of alignment.
 - MyofiberQuant recognizes myofibrils through relative peak intensities from the Gaussian distributions of F-actin signal. This approach results in some relative over-estimation of myofibrillar abundance in cells/tissues with sparse myofibrils and relative underestimation of myofibrillar abundance in cells/tissues with very dense myofibrils.  
 
