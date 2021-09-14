@@ -3,8 +3,9 @@ Quantify myofibrillar structural characteristics in images of stem cell-derived 
 Quantify myofibrillar structural characteristics in images of micron-scale 2D cardiac muscle bundles derived from stem cell-derived cardiomyocytes.
 
 # Reference This Work
-Ufford, Kathryn, et al. "Myofibrillar Structural Variability Underlies Contractile Function in Stem Cell-Derived Cardiomyocytes."
-Tsan, Yao-Chang, et al. "Physiologic Biomechanics Enhance Reproducible Contractile Development in a Reductionist Stem Cell Derived Cardiac Muscle Platform."
+Ufford, Kathryn, et al. "Myofibrillar Structural Variability Underlies Contractile Function in Stem Cell-Derived Cardiomyocytes." Stem Cell Reports 2021. PMID 33577793.
+
+Tsan, Yao-Chang, et al. "Physiologic Biomechanics Enhance Reproducible Contractile Development in a Stem Cell Derived Cardiac Muscle Platform." Nature Comm. In press. 
 
 # Getting Started
 1.	Download and unzip MyofiberQuant-main and navigate to the MyofiberQuant-main folder in MATLAB.
