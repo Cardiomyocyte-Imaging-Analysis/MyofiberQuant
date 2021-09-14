@@ -7,6 +7,8 @@ Ufford, Kathryn, et al. "Myofibrillar Structural Variability Underlies Contracti
 
 Tsan, Yao-Chang, et al. "Physiologic Biomechanics Enhance Reproducible Contractile Development in a Stem Cell Derived Cardiac Muscle Platform." Nature Comm. In press. 
 
+DOI: 10.5281/zenodo.5508165
+
 # Getting Started
 1.	Download and unzip MyofiberQuant-main and navigate to the MyofiberQuant-main folder in MATLAB.
 2.	Copy all TIF images to be analyzed to a single folder (containing only the images to be analyzed) in the same parent directory as MyofiberQuant.
